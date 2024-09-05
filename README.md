@@ -9,6 +9,7 @@ Eventually will release an EXE when I am happy with it.
 Planned features:
  - Drag and drop file support
  - Layout options
+ - Settings file (save last known folder, etc.)
 
  This is largely untested on modes other than the SGL2024 flags, please do report bugs.
 
