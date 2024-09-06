@@ -1,4 +1,4 @@
-# FFMQR-Quest-Tracker
+# FFMQR-Companion-Tracker
  Parses a GameInfo file and provides quest information for FFMQ Randomizer
 
 Planned features:
