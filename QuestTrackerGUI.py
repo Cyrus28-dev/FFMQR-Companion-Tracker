@@ -7,6 +7,8 @@ class GUI:
     def __init__(self):
         self.root = tk.Tk()
         self.gameinfo = None
+        self.processed_text =  tk.StringVar()
+        self.display_label = tk.Label(self.root, textvariable=self.processed_text, bg="#000000", fg="white", anchor="w", justify="left")
         self.companions = {
             "kaeli": {
                 "active": True,
@@ -64,6 +66,8 @@ class GUI:
     def process_gameinfo(self):
         mode = None
         companion = None
+        self.companions_reset()
+        
 
         for line in self.gameinfo:
             companions = re.search(r"\[(\w+)\]", line)
@@ -76,14 +80,11 @@ class GUI:
 
             if mode == "companion_mode":
                 if spells:
-                    # figure out what phoebe's spell threshold is
-                    # do some processing of this first but it is a start
                     spells_list = spells.group(1).split(", ")
 
                     for item in spells_list:
                         item = item.replace("Seal", "")
                         item = item.replace("Book", "")
-
                         self.companions[companion]["spells"].append(item)
 
                 if "Nothing here" in line:
@@ -96,7 +97,9 @@ class GUI:
 
     def generate_text(self):
         self.open_button.destroy()
+
         temp_txt = ""
+        self.processed_text.set("")
         indent = "  "
 
         for key, values in self.companions.items():
@@ -121,11 +124,34 @@ class GUI:
                 temp_txt += "\n"
 
 
-        processed_text = tk.StringVar()
-        processed_text.set(temp_txt)
-        label = tk.Label(self.root, textvariable=processed_text, bg="#000000", fg="white", anchor="w", justify="left")
-        label.pack()
+        self.processed_text.set(temp_txt)
+        self.display_label.destroy()
+        self.display_label = tk.Label(self.root, textvariable=self.processed_text, bg="#000000", fg="white", anchor="w", justify="left")
+        self.display_label.pack()
 
+    def companions_reset(self):
+        self.companions = {
+            "kaeli": {
+                "active": True,
+                "quests": [],
+                "spells": []
+            },
+            "tristam": {
+                "active": True,
+                "quests": [],
+                "spells": []
+            },
+            "phoebe": {
+                "active": True,
+                "quests": [],
+                "spells": []
+            },
+            "reuben": {
+                "active": True,
+                "quests": [],
+                "spells": []
+            },
+        }
 
     def setup(self):
         self.create_menu()
