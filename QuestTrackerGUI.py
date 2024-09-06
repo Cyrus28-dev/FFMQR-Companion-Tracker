@@ -126,7 +126,7 @@ class GUI:
 
         self.processed_text.set(temp_txt)
         self.display_label.destroy()
-        self.display_label = tk.Label(self.root, textvariable=self.processed_text, bg="#000000", fg="white", anchor="w", justify="left")
+        self.display_label = tk.Label(self.root, textvariable=self.processed_text, bg="#000000", fg="white", anchor="w", justify="left", pady=15) 
         self.display_label.pack()
 
     def companions_reset(self):
